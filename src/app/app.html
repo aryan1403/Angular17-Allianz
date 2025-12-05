@@ -1,0 +1,22 @@
+<h1>Contact Form</h1>
+<form [formGroup]="contactForm" (ngSubmit)="submit()">
+  <label>
+    Name:
+    <input type="text" formControlName="name"/>
+  </label> <br />
+  <label>
+    Email:
+    <input type="email" formControlName="email"/>
+  </label> <br/>
+  @if (contactForm.get('email')?.invalid && contactForm.get('email')?.touched) {
+    <small>Email is invalid</small>
+  }
+  <br />
+  <label>
+    Message:
+    <textarea formControlName="msg"></textarea>
+  </label> <br />
+  <button type="submit" [disabled]="contactForm.invalid">
+    Submit
+  </button>
+</form>
