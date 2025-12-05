@@ -1,0 +1,27 @@
+TypeScript + ts-node Setup Guide
+
+1. Install Required Packages (Local Install – Recommended)
+npm install --save-dev ts-node typescript
+
+Explanation: Installs TypeScript and ts-node only for this project, avoiding global permissions issues.
+
+2. Initialize TypeScript Configuration
+npx tsc --init
+
+Explanation: Creates a tsconfig.json file that controls how TypeScript compiles your code.
+
+3. Run Your TypeScript File
+npx ts-node basics.ts
+
+Explanation: Runs your .ts file directly without compiling manually.
+
+4. (Optional) Install TypeScript + ts-node Globally
+sudo npm install -g ts-node typescript
+
+Explanation: Allows running ts-node and tsc from anywhere, but may require system-level permissions.
+
+5. Fix Common tsconfig Issues
+If you see export/import errors, update this setting in tsconfig.json:
+"verbatimModuleSyntax": false
+
+Explanation: Allows using standard export and import with CommonJS modules.
