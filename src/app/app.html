@@ -20,3 +20,39 @@
     Submit
   </button>
 </form>
+<h2>User List</h2>
+@for (user of users; track user.id; let i = $index; let first = $first; let last = $last) {
+  <div>
+    @if (first) { <strong>First -> </strong> }
+    @if (last && this.users.length > 1) { <strong>Last -> </strong> }
+    @if (user.name.startsWith('A')) {⭐️}
+    {{ i + 1 }} - {{ user.name }}
+    <button (click)="removeUser(user.id)" >Remove</button>
+  </div>
+}
+<h2>Order Status: {{status}}</h2>
+@switch (status) {
+  @case ('pending') {
+    <p>⏳ Your Order is pending</p>
+  }
+  @case ('confirmed') {
+    <p>✅ Your Order is confirmed</p>
+  }
+  @case ('shipped') {
+    <p>🚐 Your Order is Shipped</p>
+  }
+  @default {
+    <p>⁉️ Unknown Status</p>
+  }
+}
+<button (click)="changeStatus('pending')">Pending</button>
+<button (click)="changeStatus('confirmed')">Confirmed</button>
+<button (click)="changeStatus('shipped')">Shipped</button>
+<button (click)="changeStatus('unknown')">Unknown</button>
+
+@defer (on timer(1500)) { 
+  <p>Heavy data loaded</p>
+  {{ loadData() }}
+} @placeholder {
+  <p>⏳ Loading placeholder</p>
+}

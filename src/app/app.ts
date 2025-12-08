@@ -16,6 +16,13 @@ export class App {
     email: new FormControl('', [Validators.required, Validators.email]),
     msg: new FormControl('', Validators.required)
   });
+  status: string = 'pending';
+  users = [
+    { id: 1, name: "Aaryan"},
+    { id: 2, name: "Arush"},
+    { id: 3, name: "Kirti"},
+    { id: 4, name: "Laksh"}
+  ]
   submit() {
     if(this.contactForm.valid) {
       this.submittedData = this.contactForm.value;
@@ -23,5 +30,18 @@ export class App {
       console.log(name, email, msg)
       this.contactForm.reset();
     }
+  }
+
+  removeUser(id: Number) {
+    this.users = this.users.filter(u => u.id != id)
+  }
+
+  changeStatus(newStatus: string) {
+    this.status = newStatus;
+  }
+
+
+  loadData() {
+    console.log('heavy content loaded')
   }
 }
