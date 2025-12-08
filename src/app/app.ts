@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
+interface User {
+  id: number,
+  name: string    
+}
 @Component({
   selector: 'app-root',
   imports: [ReactiveFormsModule],
@@ -17,12 +21,13 @@ export class App {
     msg: new FormControl('', Validators.required)
   });
   status: string = 'pending';
-  users = [
+  
+  users = signal<User[]>([
     { id: 1, name: "Aaryan"},
     { id: 2, name: "Arush"},
     { id: 3, name: "Kirti"},
     { id: 4, name: "Laksh"}
-  ]
+  ]);
   submit() {
     if(this.contactForm.valid) {
       this.submittedData = this.contactForm.value;
@@ -32,16 +37,13 @@ export class App {
     }
   }
 
-  removeUser(id: Number) {
-    this.users = this.users.filter(u => u.id != id)
-  }
+  addUser = (name: string) => this.users.update(list => [...list, {id: list.length + 1, name: name}]);
 
-  changeStatus(newStatus: string) {
-    this.status = newStatus;
-  }
+  clearUser = () => this.users.set([]);
 
+  removeUser = (id: Number) => this.users.update(users => users.filter(u => u.id !== id));
 
-  loadData() {
-    console.log('heavy content loaded')
-  }
+  changeStatus = (newStatus: string) => this.status = newStatus;
+
+  loadData = () => console.log('heavy content loaded')
 }
