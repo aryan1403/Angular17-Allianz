@@ -1,13 +1,14 @@
 import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
 
 interface User {
   id: number,
-  name: string    
+  name: string
 }
 @Component({
   selector: 'app-root',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -21,7 +22,7 @@ export class App {
     msg: new FormControl('', Validators.required)
   });
   status: string = 'pending';
-  
+
   users = signal<User[]>([
     { id: 1, name: "Aaryan"},
     { id: 2, name: "Arush"},

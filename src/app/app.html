@@ -1,3 +1,13 @@
+<nav>
+  <a routerLink="" routerLinkActive="active">Home</a>
+  <a routerLink="about" routerLinkActive="active">About</a>
+  <a routerLink="contact" routerLinkActive="active">Contact</a>
+</nav>
+
+<hr>
+
+<!-- All routed components load here -->
+<router-outlet></router-outlet>
 <h1>Contact Form</h1>
 <form [formGroup]="contactForm" (ngSubmit)="submit()">
   <label>
