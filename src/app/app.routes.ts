@@ -8,6 +8,7 @@ import { Orders } from './orders/orders';
 
 export const routes: Routes = [
   { path: '', component: Home },  // default route,
+  { path: 'home', redirectTo: '', pathMatch: 'full' }, 
   { path: 'orders', component: Orders},
   { path: 'users', component: Users },
   { path: 'contact', component: Contact },

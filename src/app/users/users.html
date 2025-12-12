@@ -1,28 +1,32 @@
-<div class="user-container">
+<div class="api-container">
 
-  <h2>User List</h2>
+  <h2>User API Demo</h2>
+  <button class="btn-refresh" (click)="loadUsers()">Reload Users</button>
 
-  @for (user of users(); track user.id; let i = $index; let first = $first; let last = $last) {
-    <div class="user-row fade-in">
+  @if (loading) {
+  <div class="skeleton-container">
+    <div class="skeleton"></div>
+    <div class="skeleton"></div>
+    <div class="skeleton"></div>
+  </div>
+}
 
-      <div>
-        @if (first) { <span class="badge badge-first">FIRST</span> }
-        @if (last && this.users.length > 1) { <span class="badge badge-last">LAST</span> }
-        @if (user.name.startsWith('A')) { <span class="star">⭐️</span> }
-
-        {{ i + 1 }}. {{ user.name }}
-      </div>
-
-      <button class="btn" (click)="removeUser(user.id)">Remove</button>
-    </div>
-
-  } @empty {
-    <p class="empty-text">No users found</p>
+  @if (error) {
+    <p class="error">{{ error }}</p>
   }
 
-  <input #uName placeholder="Enter user name" />
-
-  <button class="btn btn-add" (click)="addUser(uName.value)">Add User</button>
-  <button class="btn btn-clear" (click)="clearUser()">Clear Users</button>
-
+  @if (!loading && users.length > 0) {
+    @for (u of users; track u.id) {
+      <div class="user-card">
+        <div>
+          <h3>{{ u.name }}</h3>
+          <p>{{ u.email }}</p>
+        </div>
+        <button class="btn-remove" (click)="removeUser(u.id)">Remove</button>
+      </div>
+    }
+    @empty {
+    <p>No users available.</p>
+  }
+}
 </div>
