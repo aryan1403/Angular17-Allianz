@@ -1,74 +1,12 @@
-<nav>
-  <a routerLink="" routerLinkActive="active">Home</a>
-  <a routerLink="about" routerLinkActive="active">About</a>
-  <a routerLink="contact" routerLinkActive="active">Contact</a>
-</nav>
-
-<hr>
-
-<!-- All routed components load here -->
-<router-outlet></router-outlet>
-<h1>Contact Form</h1>
-<form [formGroup]="contactForm" (ngSubmit)="submit()">
-  <label>
-    Name:
-    <input type="text" formControlName="name" />
-  </label> <br />
-  <label>
-    Email:
-    <input type="email" formControlName="email" />
-  </label> <br />
-  @if (contactForm.get('email')?.invalid && contactForm.get('email')?.touched) {
-  <small>Email is invalid</small>
-  }
-  <br />
-  <label>
-    Message:
-    <textarea formControlName="msg"></textarea>
-  </label> <br />
-  <button type="submit" [disabled]="contactForm.invalid">
-    Submit
-  </button>
-</form>
-<h2>User List</h2>
-@for (user of users(); track user.id; let i = $index; let first = $first; let last = $last) {
-  <div>
-    @if (first) { <strong>First -> </strong> }
-    @if (last && this.users.length > 1) { <strong>Last -> </strong> }
-    @if (user.name.startsWith('A')) {⭐️}
-    {{ i + 1 }} - {{ user.name }}
-    <button (click)="removeUser(user.id)">Remove</button>
+<nav class="navbar">
+  <div routerLink="/" class="nav-title">Angular 17 Training</div>
+  <div class="nav-links">
+    <a routerLink="/orders" routerLinkActive="active">Orders</a>
+    <a routerLink="/users" routerLinkActive="active">Users</a>
+    <a routerLink="/contact" routerLinkActive="active">Contact</a>
   </div>
-} @empty {
-  <p style="color: red;">No users found</p>
-}
-<input #uName />
-<button (click)="addUser(uName.value)">Add User</button>
-<button (click)="clearUser()">Clear Users</button>
-
-<h2>Order Status: {{status}}</h2>
-@switch (status) {
-@case ('pending') {
-<p>⏳ Your Order is pending</p>
-}
-@case ('confirmed') {
-<p>✅ Your Order is confirmed</p>
-}
-@case ('shipped') {
-<p>🚐 Your Order is Shipped</p>
-}
-@default {
-<p>⁉️ Unknown Status</p>
-}
-}
-<button (click)="changeStatus('pending')">Pending</button>
-<button (click)="changeStatus('confirmed')">Confirmed</button>
-<button (click)="changeStatus('shipped')">Shipped</button>
-<button (click)="changeStatus('unknown')">Unknown</button>
-
-@defer (on timer(1500)) {
-<p>Heavy data loaded</p>
-{{ loadData() }}
-} @placeholder {
-<p>⏳ Loading placeholder</p>
-}
+</nav>
+<hr>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

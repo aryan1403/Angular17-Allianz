@@ -1,0 +1,38 @@
+<div class="order-container">
+
+<h2>Order Status: {{status}}</h2>
+
+@switch (status) {
+  @case ('pending') {
+    <p class="status-text status-pending fade-in">⏳ Your Order is Pending</p>
+  }
+  @case ('confirmed') {
+    <p class="status-text status-confirmed fade-in">✅ Your Order is Confirmed</p>
+  }
+  @case ('shipped') {
+    <p class="status-text status-shipped fade-in">🚐 Your Order is Shipped</p>
+  }
+  @default {
+    <p class="status-text status-unknown fade-in">⁉️ Unknown Status</p>
+  }
+}
+
+<div class="btn-row">
+  <button class="btn" (click)="changeStatus('pending')">Pending</button>
+  <button class="btn" (click)="changeStatus('confirmed')">Confirmed</button>
+  <button class="btn" (click)="changeStatus('shipped')">Shipped</button>
+  <button class="btn" (click)="changeStatus('unknown')">Unknown</button>
+</div>
+
+@defer (on timer(1500)) {
+  <div class="defer-box fade-in">
+    <p>📦 Heavy data loaded</p>
+    {{ loadData() }}
+  </div>
+} @placeholder {
+  <div class="defer-box">
+    <p>⏳ Loading placeholder...</p>
+  </div>
+}
+
+</div>

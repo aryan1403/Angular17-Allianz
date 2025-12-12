@@ -1,0 +1,28 @@
+<div class="user-container">
+
+  <h2>User List</h2>
+
+  @for (user of users(); track user.id; let i = $index; let first = $first; let last = $last) {
+    <div class="user-row fade-in">
+
+      <div>
+        @if (first) { <span class="badge badge-first">FIRST</span> }
+        @if (last && this.users.length > 1) { <span class="badge badge-last">LAST</span> }
+        @if (user.name.startsWith('A')) { <span class="star">⭐️</span> }
+
+        {{ i + 1 }}. {{ user.name }}
+      </div>
+
+      <button class="btn" (click)="removeUser(user.id)">Remove</button>
+    </div>
+
+  } @empty {
+    <p class="empty-text">No users found</p>
+  }
+
+  <input #uName placeholder="Enter user name" />
+
+  <button class="btn btn-add" (click)="addUser(uName.value)">Add User</button>
+  <button class="btn btn-clear" (click)="clearUser()">Clear Users</button>
+
+</div>
