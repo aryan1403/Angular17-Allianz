@@ -3,7 +3,7 @@
     <h2>User API Demo</h2>
     <button class="btn-refresh" (click)="loadUsers()">Reload Users</button>
 
-    @if (loading) {
+    @if (loading()) {
     <div class="skeleton-container">
         <div class="skeleton"></div>
         <div class="skeleton"></div>
@@ -11,12 +11,12 @@
     </div>
     }
 
-    @if (error) {
-    <p class="error">{{ error }}</p>
+    @if (error()) {
+    <p class="error">{{ error() }}</p>
     }
 
-    @if (!loading && users.length > 0) {
-    @for (u of users; track u.id) {
+    @if (!loading() && totalUsers() > 0) {
+    @for (u of users(); track u.id) {
     <div class="user-card">
         <div>
             <h3>{{ u.name }}</h3>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { UserApiService, User } from '../services/user-api.service';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
@@ -10,13 +10,16 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
   styleUrls: ['./users.css']
 })
 export class UsersApiComponent implements OnInit {
+  // State
+  users = signal<User[]>([]);
+  loading = signal(false);
+  error = signal<string | null>(null);
 
-  users: User[] = [];
-  loading = false;
-  error = '';
+  // Dervied state
+  totalUsers = computed(() => this.users().length);
 
   constructor(private userService: UserApiService) {
-    
+    this.loadUsers();
   }
 
   ngOnInit() {
@@ -24,24 +27,22 @@ export class UsersApiComponent implements OnInit {
   }
 
   loadUsers() {
-    this.loading = true;
-    this.error = '';
+    this.loading.set(true);
+    this.error.set(null);
 
     this.userService.getUsers().subscribe({
       next: (data) => {
-        this.users = [...data];  // NEW array ensures UI updates
-        this.loading = false;
+        this.users.set([...data]);  // NEW array ensures UI updates
+        this.loading.set(false);
       },
       error: () => {
-        this.error = 'Failed to load users';
-        this.loading = false;
+        this.error.set('Failed to load users');
+        this.loading.set(false);
       }
     });
   }
 
   removeUser(id: number) {
-    this.users = this.users.filter(u => u.id !== id);
-
-    this.userService.deleteUser(id).subscribe();
+    this.users.update(users => users.filter(u => u.id !== id));
   }
 }
