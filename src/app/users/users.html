@@ -1,32 +1,35 @@
 <div class="api-container">
 
-  <h2>User API Demo</h2>
-  <button class="btn-refresh" (click)="loadUsers()">Reload Users</button>
+    <h2>User API Demo</h2>
+    <button class="btn-refresh" (click)="loadUsers()">Reload Users</button>
 
-  @if (loading) {
-  <div class="skeleton-container">
-    <div class="skeleton"></div>
-    <div class="skeleton"></div>
-    <div class="skeleton"></div>
-  </div>
-}
+    @if (loading) {
+    <div class="skeleton-container">
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+    </div>
+    }
 
-  @if (error) {
+    @if (error) {
     <p class="error">{{ error }}</p>
-  }
+    }
 
-  @if (!loading && users.length > 0) {
+    @if (!loading && users.length > 0) {
     @for (u of users; track u.id) {
-      <div class="user-card">
+    <div class="user-card">
         <div>
-          <h3>{{ u.name }}</h3>
-          <p>{{ u.email }}</p>
+            <h3>{{ u.name }}</h3>
+            <p>{{ u.email }}</p>
         </div>
         <button class="btn-remove" (click)="removeUser(u.id)">Remove</button>
-      </div>
+    </div>
     }
     @empty {
-    <p>No users available.</p>
-  }
-}
+    <p class="empty">No users available.</p>
+    }
+
+    }
+
+
 </div>

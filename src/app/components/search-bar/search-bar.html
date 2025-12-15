@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>Live User Search (RxJS)</h2>
+
+  <input
+    type="text"
+    [formControl]="search"
+    placeholder="Search users by name"
+  />
+
+  @if (loading) {
+    <p class="loading">Loading...</p>
+  }
+
+  @for (u of users; track u.id) {
+    <div class="user-card">
+      <strong>{{ u.name }} </strong>
+      <span>{{ u.email }}</span>
+    </div>
+  }
+
+  @empty {
+    <p class="empty">No users found</p>
+  }
+</div>
+

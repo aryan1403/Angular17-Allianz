@@ -9,17 +9,32 @@ h2 {
   margin-bottom: 20px;
 }
 
-.loading {
-  color: #0077c2;
-  text-align: center;
+/* Loading Indicator */
+.skeleton-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.skeleton {
+  height: 50px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #eeeeee 25%, #cccccc 50%, #eeeeee 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 200%; }
+  100% { background-position: -200%; }
 }
 
+/* Error */
 .error {
   color: #d32f2f;
   text-align: center;
   font-weight: bold;
 }
 
+/* Buttons */
 .btn-refresh {
   display: block;
   margin: 0 auto 20px;
@@ -30,13 +45,24 @@ h2 {
   font-weight: bold;
   border-radius: 6px;
   cursor: pointer;
-  transition: 0.25s;
 }
-
 .btn-refresh:hover {
   background: #0d47a1;
 }
 
+.btn-remove {
+  background: #d32f2f;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-remove:hover {
+  background: #b71c1c;
+}
+
+/* Card */
 .user-card {
   display: flex;
   justify-content: space-between;
@@ -52,36 +78,8 @@ h2 {
   margin: 0;
 }
 
-.btn-remove {
-  background: #d32f2f;
-  border: none;
-  padding: 8px 12px;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.25s;
+.empty {
+  text-align: center;
+  color: #666;
+  padding-top: 20px;
 }
-
-.btn-remove:hover {
-  background: #b71c1c;
-}
-
-.skeleton-container {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.skeleton {
-  height: 50px;
-  background: linear-gradient(90deg, #eeeeee 25%, #dddddd 50%, #eeeeee 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.2s infinite;
-  border-radius: 8px;
-}
-
-@keyframes shimmer {
-  0% { background-position: 200% }
-  100% { background-position: -200% }
-}
-

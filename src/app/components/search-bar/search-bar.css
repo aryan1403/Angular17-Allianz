@@ -1,0 +1,31 @@
+.container {
+  max-width: 500px;
+  margin: 30px auto;
+  font-family: Arial, sans-serif;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.loading {
+  color: #1976d2;
+  font-weight: bold;
+}
+
+.user-card {
+  padding: 12px;
+  background: #f7f9fc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border-left: 4px solid #1976d2;
+}
+
+.empty {
+  text-align: center;
+  color: #999;
+}
