@@ -1,0 +1,14 @@
+<h2>Login</h2>
+
+<form (ngSubmit)="submit()" novalidate>
+  <input placeholder="Email" [formControl]="email" />
+  <input type="password" placeholder="Password" [formControl]="password" />
+
+  <button type="submit" (click)="submit()">Login</button>
+
+  @if (error) {
+    <p style="color:red">{{ error }}</p>
+  }
+</form>
+
+<p><b>Demo Login:</b> admin@example.com / password</p>
