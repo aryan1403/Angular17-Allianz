@@ -28,6 +28,16 @@ export class UserApiService {
     );
   }
 
+  getUserById(id: number): Observable<User | null> {
+    return this.http.get<User>(`${this.apiUrl}/${id}`).pipe(
+      timeout(3000),
+      catchError(() => {
+        console.error('Error loading user with id', id);
+        return of(null);
+      }
+    ));
+  }
+
   deleteUser(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`).pipe(
       timeout(3000),

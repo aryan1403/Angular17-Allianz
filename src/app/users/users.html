@@ -1,35 +1,53 @@
-<div class="api-container">
+<div class="users-wrapper">
 
-    <h2>User API Demo</h2>
-    <button class="btn-refresh" (click)="loadUsers()">Reload Users</button>
+  <header class="users-header">
+    <h2>Users</h2>
+    <button class="btn-refresh" (click)="loadUsers()">Refresh</button>
+  </header>
 
-    @if (loading()) {
+  @if (loading()) {
     <div class="skeleton-container">
-        <div class="skeleton"></div>
-        <div class="skeleton"></div>
-        <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
     </div>
-    }
+  }
 
-    @if (error()) {
-    <p class="error">{{ error() }}</p>
-    }
+  @if (error()) {
+    <div class="error-box">
+      {{ error() }}
+    </div>
+  }
 
-    @if (!loading() && totalUsers() > 0) {
-    @for (u of users(); track u.id) {
-    <div class="user-card">
-        <div>
+  @if (!loading() && totalUsers() > 0) {
+    <div class="users-grid">
+      @for (u of users(); track u.id) {
+        <div class="user-card">
+          <div class="user-info">
             <h3>{{ u.name }}</h3>
             <p>{{ u.email }}</p>
-        </div>
-        <button class="btn-remove" (click)="removeUser(u.id)">Remove</button>
-    </div>
-    }
-    @empty {
-    <p class="empty">No users available.</p>
-    }
+          </div>
 
-    }
+          <div class="actions">
+            <button
+              class="btn-primary"
+              [routerLink]="['/users', u.id]">
+              View
+            </button>
+
+            <button
+              class="btn-remove"
+              (click)="removeUser(u.id)">
+              Remove
+            </button>
+          </div>
+        </div>
+      }
+      @empty {
+        <p class="empty">No users available.</p>
+      }
+    </div>
+  }
 
 
 </div>

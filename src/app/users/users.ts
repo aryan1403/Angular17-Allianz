@@ -1,13 +1,13 @@
 import { Component, computed, OnInit, signal } from '@angular/core';
 import { UserApiService, User } from '../services/user-api.service';
-import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-users-api',
   standalone: true,
   templateUrl: './users.html',
-  styleUrls: ['./users.css']
+  styleUrls: ['./users.css'],
+  imports: [RouterLink]
 })
 export class UsersApiComponent implements OnInit {
   // State
