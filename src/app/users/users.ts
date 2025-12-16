@@ -1,7 +1,6 @@
 import { Component, computed, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { UserStore } from '../store/user.store';
-import { User } from '../services/user-api.service';
 
 @Component({
   selector: 'app-users-api',
@@ -11,18 +10,24 @@ import { User } from '../services/user-api.service';
   imports: [RouterLink]
 })
 export class UsersApiComponent {
-  users;
-  loading;
-  error;
-  totalUsers;
-
   constructor(private store: UserStore) {
-    this.users = this.store.users;
-    this.loading = this.store.loading;
-    this.error = this.store.error;
-    this.totalUsers = this.store.totalUsers;
-
     this.store.loadUsers();
+  }
+
+  get users() {
+    return this.store.users();
+  }
+
+  get loading() {
+    return this.store.loading();
+  }
+
+  get error() {
+    return this.store.error();
+  }
+
+  get totalUsers() {
+    return this.store.totalUsers();
   }
 
   removeUser(id: number) {

@@ -5,7 +5,7 @@
     <!-- <button class="btn-refresh" (click)="store.loadUsers()">Refresh</button> -->
   </header>
 
-  @if (loading()) {
+  @if (loading) {
     <div class="skeleton-container">
       <div class="skeleton"></div>
       <div class="skeleton"></div>
@@ -13,15 +13,15 @@
     </div>
   }
 
-  @if (error()) {
+  @if (error) {
     <div class="error-box">
-      {{ error() }}
+      {{ error }}
     </div>
   }
 
-  @if (!loading() && totalUsers() > 0) {
+  @if (!loading && totalUsers > 0) {
     <div class="users-grid">
-      @for (u of users(); track u.id) {
+      @for (u of users; track u.id) {
         <div class="user-card">
           <div class="user-info">
             <h3>{{ u.name }}</h3>
@@ -48,6 +48,4 @@
       }
     </div>
   }
-
-
 </div>

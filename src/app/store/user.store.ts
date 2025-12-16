@@ -32,6 +32,4 @@ export class UserStore {
     removeUser(id: number) {
         this.users.update(users => users.filter(u => u.id !== id));
     }
-
-
 }
