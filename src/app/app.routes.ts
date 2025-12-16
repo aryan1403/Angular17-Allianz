@@ -11,8 +11,8 @@ import { authGuard } from './services/auth.guard';
 export const routes: Routes = [
   { path: '', component: Home, canActivate: [authGuard] },  // default route,
   { path: 'home', redirectTo: '', pathMatch: 'full' }, 
-  { path: 'orders', component: Orders, canActivate: [authGuard]},
-  { path: 'users', component: UsersApiComponent, canActivate: [authGuard] },
+  { path: 'orders', loadComponent: () => import('./orders/orders').then(m => m.Orders), canActivate: [authGuard]},
+  { path: 'users', loadComponent: () => import('./users/users').then(m => m.UsersApiComponent), canActivate: [authGuard] },
   { path: 'contact', component: Contact },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent }
