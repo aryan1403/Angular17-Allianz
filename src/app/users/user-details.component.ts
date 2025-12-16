@@ -1,7 +1,7 @@
-import { Component, OnInit, signal } from "@angular/core";
-import { User, UserApiService } from "../services/user-api.service";
-import { ActivatedRoute, RouterLink } from "@angular/router";
-import { CommonModule, NgIf } from "@angular/common";
+import { Component, signal } from "@angular/core";
+import { User } from "../services/user-api.service";
+import { ActivatedRoute } from "@angular/router";
+import { CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
