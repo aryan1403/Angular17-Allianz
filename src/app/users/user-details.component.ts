@@ -13,22 +13,10 @@ import { CommonModule, NgIf } from "@angular/common";
         <p>No User Found</p>
     }`
 })
-export class UserDetailsComponent implements OnInit {
+export class UserDetailsComponent {
     user = signal<User | null>(null);
-    constructor(private userApiService: UserApiService, private route: ActivatedRoute) {}
-
-    ngOnInit() {
-        this.route.paramMap.subscribe(params => {
-            const id = Number(params.get('id'));
-            if(!id) {
-                this.user.set(null);
-                return;
-            }
-
-            this.userApiService.getUserById(id).subscribe({
-                next: user => this.user.set(user),
-                error: () => this.user.set(null)
-            });
-        });
+    constructor(private route: ActivatedRoute) {
+        const resolvedUser = this.route.snapshot.data['user'] as User | null;
+        this.user.set(resolvedUser);
     }
 }
