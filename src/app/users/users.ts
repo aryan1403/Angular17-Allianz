@@ -10,7 +10,7 @@ import { UserStore } from '../store/user.store';
   imports: [RouterLink]
 })
 export class UsersApiComponent {
-  constructor(private store: UserStore) {
+  constructor(public store: UserStore) {
     this.store.loadUsers();
   }
 
