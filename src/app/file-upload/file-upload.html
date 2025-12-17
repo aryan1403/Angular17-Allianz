@@ -1,0 +1,25 @@
+<h2>Profile Image Upload</h2>
+<input type="file" (change)="onFileSelect($event)" />
+
+@if (previewUrl()) {
+    <div class="preview">
+        <img [src]="previewUrl()" alt="Preview" />
+    </div>
+}
+
+@if(uploading()) {
+    <div class="progress-bar">
+        <div class="progress" [style.width.%]="progress()"></div>
+    </div>
+    <p>{{progress()}}%</p>
+}
+
+<button (click)="upload()" [disabled]="!selectedFile || uploading()">Upload</button>
+
+@if (success()) {
+    <div class="success">File uploaded successfully!</div>
+}
+
+@if (error()) {
+    <div class="error">{{ error() }}</div>
+}

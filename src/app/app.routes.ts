@@ -5,13 +5,15 @@ import { Contact } from './contact/contact';
 import { LoginComponent } from './login/login';
 import { authGuard } from './services/auth.guard';
 import { userResolver } from './users/user.resolver';
+import { FileUpload } from './file-upload/file-upload';
 
 export const routes: Routes = [
   { path: '', component: Home, canActivate: [authGuard] },  // default route,
-  { path: 'home', redirectTo: '', pathMatch: 'full' }, 
-  { path: 'orders', loadComponent: () => import('./orders/orders').then(m => m.Orders), canActivate: [authGuard]},
+  { path: 'home', redirectTo: '', pathMatch: 'full' },
+  { path: 'orders', loadComponent: () => import('./orders/orders').then(m => m.Orders), canActivate: [authGuard] },
   { path: 'users', loadComponent: () => import('./users/users').then(m => m.UsersApiComponent), canActivate: [authGuard] },
-  { path: 'users/:id', 
+  {
+    path: 'users/:id',
     loadComponent: () => import('./users/user-details.component').then(m => m.UserDetailsComponent),
     resolve: {
       user: userResolver
@@ -20,5 +22,6 @@ export const routes: Routes = [
   },
   { path: 'contact', component: Contact },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'upload', component: FileUpload, canActivate: [authGuard] }
 ];
