@@ -5,6 +5,12 @@
     <!-- <button class="btn-refresh" (click)="store.loadUsers()">Refresh</button> -->
   </header>
 
+  @if(isAdmin()) {
+    <p>Admin actions</p>
+  } @else {
+    <p>Standard user view</p>
+  }
+
   @if (loading) {
   <div class="skeleton-container">
     <div class="skeleton"></div>

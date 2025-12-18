@@ -1,8 +1,10 @@
 <nav class="navbar">
   <div routerLink="/home" class="nav-title">Angular 17 Training</div>
   <div class="nav-links">
-    <a routerLink="/orders" routerLinkActive="active">Orders</a>
-    <a routerLink="/users" routerLinkActive="active">Users</a>
+    @if(authService.isLoggedIn()) {
+      <a routerLink="/orders" routerLinkActive="active">Orders</a>
+      <a routerLink="/users" routerLinkActive="active">Users</a>
+    }
     <a routerLink="/contact" routerLinkActive="active">Contact</a>
     <a (click)="Logout()" routerLinkActive="active">Logout</a>
   </div>

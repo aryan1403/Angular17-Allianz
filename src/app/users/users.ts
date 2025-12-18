@@ -14,6 +14,11 @@ export class UsersApiComponent {
     this.store.loadUsers();
   }
 
+  isAdmin = computed(() => {
+    // In real app, get user role from AuthService
+    return false; // assuming admin for demo
+  });
+
   get users() {
     return this.store.users();
   }
