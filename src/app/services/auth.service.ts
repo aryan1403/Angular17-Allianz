@@ -1,37 +1,45 @@
 import { computed, Injectable, signal } from "@angular/core";
 import { Router } from "@angular/router";
 
+interface User {
+    email: string;
+    role: 'ADMIN' | 'USER';
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
     // AUTH state
-    private _isLoggedIn = signal(false);
-    private _user = signal<{ email: string } | null>(null);
+    private tokenSignal = signal<string | null>(null);
+    private userSignal = signal<User | null>(null);
 
     // Exposed Signals
-    isLoggedIn = computed(() => this._isLoggedIn());
-    user = computed(() => this._user());
+    isLoggedIn = computed(() => !!this.tokenSignal());
+    token = computed(() => this.tokenSignal());
+    user = computed(() => this.userSignal());
 
     constructor(private router: Router) {
-        // restore auth state from localStorage if available
-        const saved = localStorage.getItem('auth_user');
-        if(saved) {
-            this._user.set(JSON.parse(saved));
-            this._isLoggedIn.set(true);
+        const token = localStorage.getItem('jwt_token');
+        const user = localStorage.getItem('jwt_user');
+
+        if(token && user) {
+            this.tokenSignal.set(token);
+            this.userSignal.set(JSON.parse(user));
         }
     }
 
     login(email: string, password: string): boolean {
         // Simulate login API call
         // In real app, replace with actual HTTP request
-        console.log('Attempting login for', email);
         if(email === 'admin@example.com' && password === 'password') {
-            console.log('Login successful');
-            const user = { email };
-            this._user.set(user);
-            this._isLoggedIn.set(true);
-            localStorage.setItem('auth_user', JSON.stringify(user));
+            const fakeJwt = 'ey.faje.jwt.token.123';
+
+            this.tokenSignal.set(fakeJwt);
+            this.userSignal.set({ email, role: 'ADMIN' });
+
+            localStorage.setItem('jwt_token', fakeJwt);
+            localStorage.setItem('jwt_user', JSON.stringify({ email, role: 'ADMIN' }));
             this.router.navigate(['/home']);
             return true;
         }
@@ -39,9 +47,10 @@ export class AuthService {
     }
 
     logout() {
-        this._user.set(null);
-        this._isLoggedIn.set(false);
-        localStorage.removeItem('auth_user');
+        this.tokenSignal.set(null);
+        this.userSignal.set(null);
+        localStorage.clear();
+        
         this.router.navigate(['/login']);
     }
 }
