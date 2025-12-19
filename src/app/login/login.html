@@ -4,8 +4,7 @@
   <input placeholder="Email" [formControl]="email" />
   <input type="password" placeholder="Password" [formControl]="password" />
 
-  <button type="submit" (click)="submit()">Login</button>
-
+  <lib-button variant="danger" type="submit" (click)="submit()">Login</lib-button>
   @if (error) {
     <p style="color:red">{{ error }}</p>
   }
